@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from src.relatorio.certificado import Certificado
+from src.relatorio.certificado import Certificado, Escola
 
 
 class LeitorDeCertificados:
@@ -32,7 +32,7 @@ class LeitorDeCertificados:
     def converte_arquivo_em_certificado(self, arquivo):
         partes = arquivo.split("_")
         data = datetime.strptime(partes[0], "%Y%m%d")
-        escola = partes[1]
+        escola = Escola.escola_por_nome(partes[1])
         titulo = os.path.splitext(partes[2])[0]
 
         return Certificado(data, escola, titulo)

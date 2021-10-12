@@ -4,7 +4,7 @@ import pytest
 from unittest.mock import patch
 
 from src.relatorio.leitor_de_certificados import LeitorDeCertificados
-from src.relatorio.certificado import Certificado
+from src.relatorio.certificado import Certificado, Escola, FORMATO_DA_DATA
 
 class TestLeitorDeCertificados:
 
@@ -19,15 +19,24 @@ class TestLeitorDeCertificados:
                 "20211231_GRASSHOPER_CURSO 03.pdf"]
 
     @pytest.fixture
-    def certificados_esperados(self):
-        data_curso_1 = datetime.strptime("20210101", "%Y%m%d")
-        data_curso_2 = datetime.strptime("20210630", "%Y%m%d")
-        data_curso_3 = datetime.strptime("20211231", "%Y%m%d")
+    def alura(self):
+        return Escola.escola_por_nome("ALURA")
+
+    @pytest.fixture
+    def grasshoper(self):
+        return Escola.escola_por_nome("GRASSHOPER")
+
+    @pytest.fixture
+    def certificados_esperados(self, alura, grasshoper):
+
+        data_curso_1 = datetime.strptime("20210101", FORMATO_DA_DATA)
+        data_curso_2 = datetime.strptime("20210630", FORMATO_DA_DATA)
+        data_curso_3 = datetime.strptime("20211231", FORMATO_DA_DATA)
 
         return [
-            Certificado(data_curso_1, "ALURA", "CURSO 01"),
-            Certificado(data_curso_2, "ALURA", "CURSO 02"),
-            Certificado(data_curso_3, "GRASSHOPER", "CURSO 03"),
+            Certificado(data_curso_1, alura, "CURSO 01"),
+            Certificado(data_curso_2, alura, "CURSO 02"),
+            Certificado(data_curso_3, grasshoper, "CURSO 03"),
         ]
 
     @patch("src.relatorio.leitor_de_certificados.os.listdir")
