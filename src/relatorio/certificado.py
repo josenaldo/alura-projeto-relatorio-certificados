@@ -26,7 +26,7 @@ class Escola:
     def escola_por_nome(name):
 
         escolas = {
-            "ALURA": Escola("GRASSHOPER", datetime.strptime("20210901", FORMATO_DA_DATA)),
+            "ALURA": Escola("ALURA", datetime.strptime("20210901", FORMATO_DA_DATA)),
             "GRASSHOPER": Escola("GRASSHOPER", datetime.strptime("20210901", FORMATO_DA_DATA)),
         }
 

@@ -1,13 +1,18 @@
 from src.relatorio.leitor_de_certificados import LeitorDeCertificados
 
 # Lê o diretório de certificados
+from src.relatorio.relatorios import RelatorioPorEscola
+
 leitor = LeitorDeCertificados('C:\\Users\\josen\\OneDrive\\certificados\\2021')
 arquivos = leitor.lista_arquivos()
 certificados = leitor.cria_certificados(arquivos)
 
+relatorios = [
+    RelatorioPorEscola(certificados)
+]
 
-for c in certificados:
-    print(c)
+for relatorio in relatorios:
+    relatorio.imprime()
 
 
 # Pra cada arquivo, converte em um objeto Certificado
